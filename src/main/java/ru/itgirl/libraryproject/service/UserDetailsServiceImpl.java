@@ -3,6 +3,7 @@ package ru.itgirl.libraryproject.service;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.itgirl.libraryproject.model.entity.User;
 
 import java.util.Collection;
 
@@ -12,11 +13,15 @@ import java.util.Collection;
 @Setter
 @Data
 @Builder
-public class UserService implements UserDetails {
-
+public class UserDetailsServiceImpl implements UserDetails {
     private String login;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
+    private User user;
+
+    public UserDetailsServiceImpl(User user) {
+        this.user = user;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

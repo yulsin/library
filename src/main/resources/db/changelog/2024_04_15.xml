@@ -25,18 +25,6 @@
             FOREIGN KEY (role_id) REFERENCES roles (id)
             );
 
-            Insert into users(login, password) values
-            ('user1', 'password1'),
-            ('admin0', 'password0');
-
-            Insert into roles(role) values
-            ('USER_ROLE'),
-            ('ADMIN_ROLE');
-
-            Insert into users_roles(user_id, role_id) values
-            (1, 1),
-            (2, 2);
-
         </sql>
     </changeSet>
 </databaseChangeLog>
