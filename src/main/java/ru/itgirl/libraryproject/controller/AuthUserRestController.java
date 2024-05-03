@@ -49,8 +49,8 @@ public class AuthUserRestController {
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                         .toList();
-        log.info("User: {} singed-in successfully", userDto.getLogin());
+        log.info("User: {} logged in successfully", userDto.getLogin());
         return ResponseEntity
-                .ok("User signed-in successfully");
+                .ok("User logged in successfully");
     }
 }
