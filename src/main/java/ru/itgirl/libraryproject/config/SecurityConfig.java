@@ -3,8 +3,10 @@ package ru.itgirl.libraryproject.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -17,9 +19,13 @@ import ru.itgirl.libraryproject.service.UserServiceImpl;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
     @Autowired
     UserServiceImpl userServiceImpl;
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
 
     @Bean
     public UserDetailsService userDetailsService () {
@@ -44,12 +50,11 @@ public class SecurityConfig {
      return    http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/book/v1").hasRole("USER_ROLE")
                         .requestMatchers("/book/v2", "/books").hasRole("ADMIN_ROLE")
-                        .requestMatchers("/api/auth/signin").permitAll()
+                        .requestMatchers("/api/auth/signup", "/api/auth/login").permitAll()
                         .anyRequest().authenticated())
              .httpBasic(Customizer.withDefaults())
              .authenticationProvider(authenticationProvider())
              .build();
-
     }
 
 

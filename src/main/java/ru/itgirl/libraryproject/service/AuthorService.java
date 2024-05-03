@@ -12,7 +12,7 @@ public interface AuthorService {
     AuthorDto getAuthorBySurnameV1(String surname);
     AuthorDto getAuthorBySurnameV2(String surname);
     AuthorDto getAuthorBySurnameV3(String surname);
-    AuthorDto createAuthor(AuthorCreateDto authorCreateDto);
+    AuthorDto createAuthor(AuthorCreateDto authorCreateDto) throws Exception;
     AuthorDto updateAuthor(AuthorUpdateDto authorUpdateDto);
     void deleteAuthor(Long id);
 }

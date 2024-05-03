@@ -11,20 +11,16 @@ import java.util.Set;
 @Getter
 @Entity
 public class Book {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false)
     @Setter
     private String name;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "genre_id")
     @Setter
     private Genre genre;
-
     @ManyToMany
     @JoinTable(
             name = "author_book",

@@ -8,7 +8,6 @@ import ru.itgirl.libraryproject.service.AuthorService;
 @Controller
 @RequiredArgsConstructor
 public class AuthorMvcController {
-
     private final AuthorService authorService;
 
     @GetMapping("/authors")

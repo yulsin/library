@@ -1,6 +1,8 @@
 package ru.itgirl.libraryproject.service;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,13 +17,14 @@ import ru.itgirl.libraryproject.model.entity.User;
 import ru.itgirl.libraryproject.repository.RoleRepository;
 import ru.itgirl.libraryproject.repository.UserRepository;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@SecurityRequirement(name = "library-users")
+@Slf4j
 public class UserServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
@@ -32,6 +35,7 @@ public class UserServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        log.info("Try to find a user by name {}", login);
         Optional<User> user = userRepository.findUserByLogin(login);
         if (user.isPresent()) {
             UserDetails userDetails = UserDetailsServiceImpl.builder()
@@ -43,6 +47,7 @@ public class UserServiceImpl implements UserDetailsService {
                     .build();
             return userDetails;
         } else {
+            log.error("User with name {} not found.", login);
             throw new UsernameNotFoundException(login + " not found");
         }
     }
@@ -65,7 +70,7 @@ public class UserServiceImpl implements UserDetailsService {
                 .roles(roleList)
                 .build();
     }
-
+/*
     private UserDto convertEntityToDto(User user) {
         List<RoleDto> roleDtoList = null;
         if(user.getRoles() != null) {
@@ -83,4 +88,5 @@ public class UserServiceImpl implements UserDetailsService {
                 .roles(roleDtoList)
                 .build();
     }
+ */
 }

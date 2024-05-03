@@ -8,10 +8,11 @@ import java.util.List;
 
 public interface BookService {
     List<BookDto> getAllBooks();
+    public BookDto getBookById(Long id);
     BookDto getBookByNameV1(String name);
     BookDto getBookByNameV2(String name);
     BookDto getBookByNameV3(String name);
-    BookDto createBook(BookCreateDto bookCreateDto);
+    BookDto createBook(BookCreateDto bookCreateDto) throws Exception;
     BookDto updateBook(BookUpdateDto bookUpdateDto);
     void deleteBook(Long id);
 }

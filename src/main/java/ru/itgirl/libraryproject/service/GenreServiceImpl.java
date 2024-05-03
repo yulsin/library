@@ -1,6 +1,7 @@
 package ru.itgirl.libraryproject.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.itgirl.libraryproject.model.dto.AuthorDto;
 import ru.itgirl.libraryproject.model.dto.BookDto;
@@ -12,8 +13,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class GenreServiceImpl implements GenreService {
-
     private final GenreRepository genreRepository;
 
     @Override
