@@ -56,9 +56,7 @@ public class SecurityConfig {
              .authenticationProvider(authenticationProvider())
              .build();
     }
-
-
-    /*
+/*
     @Bean
     public UserDetailsService user() {
         User.UserBuilder users = User.withDefaultPasswordEncoder();
@@ -74,5 +72,5 @@ public class SecurityConfig {
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
     }
-    */
+ */
 }

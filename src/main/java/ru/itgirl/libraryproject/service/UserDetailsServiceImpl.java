@@ -4,7 +4,6 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.itgirl.libraryproject.model.entity.User;
-
 import java.util.Collection;
 
 @AllArgsConstructor
@@ -18,6 +17,10 @@ public class UserDetailsServiceImpl implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
     private User user;
+
+    public UserDetails loadUserByLogin(String login) {
+        return null;
+    }
 
     public UserDetailsServiceImpl(User user) {
         this.user = user;

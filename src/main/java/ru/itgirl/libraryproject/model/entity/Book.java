@@ -2,7 +2,6 @@ package ru.itgirl.libraryproject.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.Set;
 
 @AllArgsConstructor

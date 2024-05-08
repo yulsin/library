@@ -8,8 +8,6 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
-
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "Library API", version = "2.0", description = "Library Information"))
 @SecurityScheme(name = "library-users", scheme = "basic", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)

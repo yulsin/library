@@ -12,7 +12,6 @@ import ru.itgirl.libraryproject.model.entity.Book;
 import ru.itgirl.libraryproject.model.entity.Genre;
 import ru.itgirl.libraryproject.repository.BookRepository;
 import ru.itgirl.libraryproject.repository.GenreRepository;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -113,13 +112,16 @@ public class BookServiceImpl implements BookService {
             throw new NoSuchElementException("There is no book with such fields");
         }
         Book book = optionalBook.get();
-        Optional<Genre> genre = genreRepository.findGenreByName(bookUpdateDto.getGenre());
-        if (genre.isEmpty()) {
-            log.error("There is no genre with such name, try a different genre");
-            throw new NoSuchElementException("There is no genre with such name, try a different genre");
+        Optional<Genre> optionalGenre = genreRepository.findGenreByName(bookUpdateDto.getGenre());
+        if (optionalGenre.isPresent()) {
+            Genre genre = optionalGenre.get();
+            book.setName(bookUpdateDto.getName());
+            book.setGenre(genre);
         }
+        Genre genre = new Genre();
+        genre.setName(bookUpdateDto.getGenre());
         book.setName(bookUpdateDto.getName());
-        book.setGenre(genre.get());
+        book.setGenre(genre);
         Book savedBook = bookRepository.save(book);
         BookDto bookDto = convertEntityToDto(savedBook);
         log.info("The book {} was updated", bookDto.toString());
@@ -134,10 +136,15 @@ public class BookServiceImpl implements BookService {
     }
 
     private Book convertDtoToEntity(BookCreateDto bookCreateDto) {
-        Genre genre = genreRepository.findGenreByName(bookCreateDto.getGenre()).orElseThrow();
-        return Book.builder()
+        Optional<Genre> optionalGenre = genreRepository.findGenreByName(bookCreateDto.getGenre());
+        if (optionalGenre.isPresent()) {
+            return Book.builder()
+                    .name(bookCreateDto.getName())
+                    .genre(optionalGenre.get())
+                    .build();
+        } return Book.builder()
                 .name(bookCreateDto.getName())
-                .genre(genre)
+                .genre(new Genre())
                 .build();
     }
 

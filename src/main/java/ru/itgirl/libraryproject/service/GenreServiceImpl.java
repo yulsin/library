@@ -8,7 +8,6 @@ import ru.itgirl.libraryproject.model.dto.BookDto;
 import ru.itgirl.libraryproject.model.dto.GenreDto;
 import ru.itgirl.libraryproject.model.entity.Genre;
 import ru.itgirl.libraryproject.repository.GenreRepository;
-
 import java.util.List;
 
 @Service
@@ -19,7 +18,9 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public GenreDto getGenreById(Long id) {
+        log.info("Trying to find genre by ID: {}", id);
         Genre genre = genreRepository.findById(id).orElseThrow();
+        log.info("Genre found: {}", genre);
         return convertToDto(genre);
     }
 

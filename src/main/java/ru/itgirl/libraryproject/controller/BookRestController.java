@@ -15,6 +15,11 @@ import ru.itgirl.libraryproject.service.BookService;
 public class BookRestController {
     private final BookService bookService;
 
+    @GetMapping("/book/{id}")
+    BookDto getBookById(@PathVariable("id") Long id) {
+        return bookService.getBookById(id);
+    }
+
     @GetMapping("/book/v1")
     BookDto getBookByName(@RequestParam("name") String name) {
         return bookService.getBookByNameV1(name);

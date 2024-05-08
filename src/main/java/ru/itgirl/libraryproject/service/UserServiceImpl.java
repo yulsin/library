@@ -16,7 +16,6 @@ import ru.itgirl.libraryproject.model.entity.Role;
 import ru.itgirl.libraryproject.model.entity.User;
 import ru.itgirl.libraryproject.repository.RoleRepository;
 import ru.itgirl.libraryproject.repository.UserRepository;
-
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;

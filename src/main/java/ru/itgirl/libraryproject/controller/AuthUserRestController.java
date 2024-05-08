@@ -18,10 +18,7 @@ import ru.itgirl.libraryproject.model.dto.UserDto;
 import ru.itgirl.libraryproject.repository.RoleRepository;
 import ru.itgirl.libraryproject.service.UserDetailsServiceImpl;
 import ru.itgirl.libraryproject.service.UserServiceImpl;
-
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequiredArgsConstructor
@@ -52,5 +49,5 @@ public class AuthUserRestController {
         log.info("User: {} logged in successfully", userDto.getLogin());
         return ResponseEntity
                 .ok("User logged in successfully");
-    }
+  }
 }

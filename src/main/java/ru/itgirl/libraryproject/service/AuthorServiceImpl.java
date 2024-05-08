@@ -4,14 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
 import ru.itgirl.libraryproject.model.dto.AuthorCreateDto;
 import ru.itgirl.libraryproject.model.dto.AuthorDto;
 import ru.itgirl.libraryproject.model.dto.AuthorUpdateDto;
 import ru.itgirl.libraryproject.model.dto.BookDto;
 import ru.itgirl.libraryproject.model.entity.Author;
 import ru.itgirl.libraryproject.repository.AuthorRepository;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -66,13 +64,14 @@ public class AuthorServiceImpl implements AuthorService {
             log.info("Author: {}", authorDto.toString());
             return authorDto;
         } else {
-            log.error("Author with name {} not found", surname);
+            log.error("Author with surname {} not found", surname);
             throw new NoSuchElementException("No value present");
         }
     }
 
     @Override
     public AuthorDto getAuthorBySurnameV3(String surname) {
+        log.info("Try to find the author by surname: {}", surname);
         Specification<Author> specification = Specification.where((Specification<Author>) (root, query, cb)
                 -> cb.equal(root.get("surname"), surname));
         Optional<Author> optionalAuthor = authorRepository.findOne(specification);
@@ -81,7 +80,7 @@ public class AuthorServiceImpl implements AuthorService {
             log.info("Author: {}", authorDto.toString());
             return authorDto;
         } else {
-            log.error("Author with name {} not found", surname);
+            log.error("Author with surname {} not found", surname);
             throw new NoSuchElementException("No value present");
         }
     }
@@ -126,7 +125,7 @@ public class AuthorServiceImpl implements AuthorService {
         log.info("The author with id: {} was deleted", id);
     }
 
-    private Author convertDtoToEntity(AuthorCreateDto authorCreateDto) {
+    Author convertDtoToEntity(AuthorCreateDto authorCreateDto) {
         return Author.builder()
                 .name(authorCreateDto.getName())
                 .surname(authorCreateDto.getSurname())

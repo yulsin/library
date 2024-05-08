@@ -20,8 +20,8 @@ public class AuthorRestController {
         return authorService.getAuthorById(id);
     }
 
-    @GetMapping("/author")
-    AuthorDto getAuthorBySurname(@RequestParam("surname") String surname) {
+    @GetMapping("/author/v1")
+    AuthorDto getAuthorBySurnameV1(@RequestParam("surname") String surname) {
         return authorService.getAuthorBySurnameV1(surname);
     }
 
