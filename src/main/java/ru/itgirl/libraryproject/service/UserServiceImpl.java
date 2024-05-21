@@ -1,5 +1,4 @@
 package ru.itgirl.libraryproject.service;
-
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import ru.itgirl.libraryproject.model.dto.*;
 import ru.itgirl.libraryproject.model.entity.Role;
 import ru.itgirl.libraryproject.model.entity.User;
